@@ -5,50 +5,50 @@ using namespace std;
 
 // } Driver Code Ends
 
-// class Solution
-// {
-//     public:
-//     //Function to find the smallest positive number missing from the array.
-//     int missingNumber(int arr[], int n) 
-//     { 
-//         // Your code here
-//         vector<int> a;
-//         for(int i=0;i<n;i++)
-//         {
-//             if(arr[i]>0)
-//                 a.push_back(arr[i]);
-//         }
-//         if(a.size()==0)
-//             return 1;
-//         sort(a.begin(), a.end());
-//         for(int i=0;i<a.size();i++)
-//         {
-//             if(a[i] != i+1)
-//                 return (i+1);
-//         }
-//         return a.size()+1;
-//     } 
-// };
-
-
-class Solution {
-public:
-    int missingNumber(int arr[], int n) {
-        vector<bool> present(n + 1, false);
-
-        for (int i = 0; i < n; i++) {
-            if (arr[i] >= 0 && arr[i] <= n)
-                present[arr[i]] = true;
+class Solution
+{
+    public:
+    //Function to find the smallest positive number missing from the array.
+    int missingNumber(int arr[], int n) 
+    { 
+        // Your code here
+        map<int, bool> m;
+        for(int i=0;i<n;i++)
+        {
+            if(arr[i]>0 && arr[i]<=n)
+                if(m.find(arr[i])==m.end())
+                    m[arr[i]]=true;
         }
-
-        for (int i = 1; i <= n; i++) {
-            if (!present[i])
-                return i;
+        if(m.size()==0)
+            return 1;
+        for(int i=1;;i++)
+        {
+            if(m.find(i)==m.end())
+                return (i);
         }
-
-        return n + 1;
-    }
+        return 1;
+    } 
 };
+
+
+// class Solution {
+// public:
+//     int missingNumber(int arr[], int n) {
+//         vector<bool> present(n + 1, false);
+
+//         for (int i = 0; i < n; i++) {
+//             if (arr[i] >= 0 && arr[i] <= n)
+//                 present[arr[i]] = true;
+//         }
+
+//         for (int i = 1; i <= n; i++) {
+//             if (!present[i])
+//                 return i;
+//         }
+
+//         return n + 1;
+//     }
+// };
 
 
 
