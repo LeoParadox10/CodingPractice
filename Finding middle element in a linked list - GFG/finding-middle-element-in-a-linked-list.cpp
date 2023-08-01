@@ -39,27 +39,26 @@ struct Node {
 class Solution{
     public:
     
-    int getLength(Node *head)
-    {
-        int l = 0;
-        while (head != NULL)
-        {
-            l++;
-            head = head->next;
-        }
-        return l;
-    }
-    
     /* Should return data of middle node. If linked list is empty, then  -1*/
     int getMiddle(Node *head)
     {
-        // Your code here
-        int l=getLength(head)/2;
-        while(l--)
+        if(head==NULL || head->next==NULL)
+            return head->data;
+        else if(head->next->next==NULL)
+            return head->next->data;
+        else
         {
-            head=head->next;
+            Node *prev=head;
+            Node *curr=head->next;
+            while(curr!=NULL)
+            {
+                curr=curr->next;
+                if(curr!=NULL)
+                    curr=curr->next;
+                prev=prev->next;
+            }
+            return prev->data;
         }
-        return head->data;
     }
 };
 
