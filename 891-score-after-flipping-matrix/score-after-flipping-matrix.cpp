@@ -6,15 +6,8 @@ public:
         for(int i=0;i<m;i++)
         {
             if(grid[i][0]==0)
-            {
                 for(int j=0;j<n;j++)
-                {
-                    if(grid[i][j]==0)
-                        grid[i][j]=1;
-                    else
-                        grid[i][j]=0;
-                }
-            }
+                    grid[i][j]^=1;
             else
                 continue;
         }
@@ -30,15 +23,8 @@ public:
                     one++;
             }
             if(zero>one)
-            {
                 for(int i=0;i<m;i++)
-                {
-                    if(grid[i][j]==0)
-                        grid[i][j]=1;
-                    else
-                        grid[i][j]=0;
-                }
-            }
+                    grid[i][j]^=1;
         }
         int sum=0;
         for(int i=0;i<m;i++)
