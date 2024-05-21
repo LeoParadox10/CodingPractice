@@ -1,7 +1,7 @@
 class Solution {
 public:
 
-    void f(vector<vector<int>> &ans, int ind, vector<int> curr, vector<int> &nums)
+    void f(vector<vector<int>> &ans, int ind, vector<int> curr, vector<int> nums)
     {
         if(ind==-1)
         {
