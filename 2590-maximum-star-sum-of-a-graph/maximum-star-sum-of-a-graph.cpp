@@ -3,7 +3,7 @@ public:
     int maxStarSum(vector<int>& vals, vector<vector<int>>& edges, int k) {
         int n = vals.size();
         if (edges.size() == 0) {
-            int ans = INT_MIN;  // Corrected to INT_MIN
+            int ans = INT_MIN;
             for (int i = 0; i < n; i++) {
                 ans = max(ans, vals[i]);
             }
@@ -18,11 +18,12 @@ public:
             adjL[v].push_back(vals[u]);
         }
         
-        long long ans = LLONG_MIN;  // Initialize ans to a very small value
+        long long ans = LLONG_MIN;
         for (int i = 0; i < n; i++) {
             long long temp = 0;
             sort(adjL[i].rbegin(), adjL[i].rend());
-            for (int j = 0; j < min(k, (int)adjL[i].size()); j++) {  // Ensure we do not access out of bounds
+            for (int j = 0; j < min(k, (int)adjL[i].size()); j++)
+            {
                 if (adjL[i][j] > 0)
                     temp += adjL[i][j];
             }
