@@ -8,11 +8,8 @@ public:
                 ans++;
             else if(it[1]!='/')
                 ans--;
-            if(ans<0)
-                ans=0;
+            ans=max(ans, 0);
         }
-        if(ans<=0)
-            return 0;
         return ans;
     }
 };
