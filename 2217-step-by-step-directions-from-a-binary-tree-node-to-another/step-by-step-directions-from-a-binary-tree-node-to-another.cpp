@@ -42,9 +42,23 @@ public:
         pathString.pop_back();
     }
     string getDirections(TreeNode* root, int startValue, int destValue) {
-        TreeNode *lcaNode = lca(root, startValue, destValue);;
+        // TreeNode *lcaNode = lca(root, startValue, destValue);;
         string pathString="";
-        dfs(lcaNode, pathString, startValue, destValue);
+        dfs(root, pathString, startValue, destValue);
+        int comLen=0, i=0, j=0;
+        while(i<LCAtoStart.size() && j<LCAtoEnd.size())
+        {
+            if(LCAtoStart[i]==LCAtoEnd[i])
+            {
+                comLen++;
+                i++;
+                j++;
+            }
+            else
+                break;
+        }
+        LCAtoStart=LCAtoStart.substr(comLen, LCAtoStart.size()-comLen);
+        LCAtoEnd=LCAtoEnd.substr(comLen, LCAtoEnd.size()-comLen);
         for(auto &ch : LCAtoStart)
             ch='U';
         return LCAtoStart+LCAtoEnd;
