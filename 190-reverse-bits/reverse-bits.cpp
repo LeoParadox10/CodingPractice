@@ -6,7 +6,7 @@ public:
         for(int i=0;i<32;i++)
         {
             u bit=(n>>i)&1;
-            ans=ans | (bit << (31-i)); // to store bit in reverse order
+            ans=ans | (bit << (31-i));
         }
         return ans;
     }
