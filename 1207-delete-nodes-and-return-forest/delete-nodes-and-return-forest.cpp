@@ -11,40 +11,28 @@
  */
 class Solution {
 public:
-    vector<TreeNode *> ans;
-    void dfs(TreeNode *&root, unordered_set<int> &st, bool is_root)
+    TreeNode *dfs(TreeNode *&root, unordered_set<int> &st, vector<TreeNode *> &ans)
     {
         if(root==NULL)
-            return;
+            return NULL;
+        root->left=dfs(root->left, st, ans);
+        root->right=dfs(root->right, st, ans);
         if(st.find(root->val)!=st.end())
         {
-            dfs(root->left, st, true);
-            dfs(root->right, st, true);
+            if(root->left!=NULL)
+                ans.push_back(root->left);
+            if(root->right!=NULL)
+                ans.push_back(root->right);
+            return NULL;
         }
-        else
-        {
-            if(is_root)
-                ans.push_back(root);
-            TreeNode *leftNode=root->left;
-            TreeNode *rightNode=root->right;
-            if(root->left)
-            {
-                if(st.find(root->left->val)!=st.end())
-                    root->left=NULL;
-            }
-            if(root->right)
-            {
-                if(st.find(root->right->val)!=st.end())
-                    root->right=NULL;
-            }
-            dfs(leftNode, st, false);
-            dfs(rightNode, st, false);
-        }
+        return root;
     }
     vector<TreeNode*> delNodes(TreeNode* root, vector<int>& to_delete) {
-        ans.clear();
         unordered_set<int> st(to_delete.begin(), to_delete.end());
-        dfs(root, st, true);
+        vector<TreeNode *> ans;
+        if (dfs(root, st, ans) != nullptr)
+            ans.push_back(root);
+        sort(ans.begin(), ans.end());
         return ans;
     }
 };
