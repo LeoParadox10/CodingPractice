@@ -11,32 +11,34 @@
  */
 class Solution {
 public:
-    vector<int> dfs(TreeNode *node, int dis, int &noOfGoodLeafPairs)
+    unordered_map<int, int> dfs(TreeNode *node, int &dis, int &noOfGoodLeafPairs)
     {
         if(node==NULL)
             return {};
+        unordered_map<int, int> mp;
+        mp[1]=1;
         if(node->left==NULL && node->right==NULL)
-            return {1};
-        vector<int> leftv=dfs(node->left, dis, noOfGoodLeafPairs);
-        vector<int> rightv=dfs(node->right, dis, noOfGoodLeafPairs);
-        for(auto lv:leftv)
+            return mp;
+        unordered_map<int, int> leftv=dfs(node->left, dis, noOfGoodLeafPairs);
+        unordered_map<int, int> rightv=dfs(node->right, dis, noOfGoodLeafPairs);
+        for(auto [lv, lf]:leftv)
         {
-            for(auto rv:rightv)
+            for(auto [rv, rf]:rightv)
             {
                 if(lv+rv<=dis)
-                    noOfGoodLeafPairs++;
+                    noOfGoodLeafPairs+=(lf*rf);
             }
         }
-        vector<int> parentv;
-        for(auto lv:leftv)
+        unordered_map<int, int> parentv;
+        for(auto [lv, lf]:leftv)
         {
             if(lv+1<=dis)
-                parentv.push_back(lv+1);
+                parentv[lv+1]+=lf;
         }
-        for(auto rv:rightv)
+        for(auto [rv, rf]:rightv)
         {
             if(rv+1<=dis)
-                parentv.push_back(rv+1);
+                parentv[rv+1]+=rf;
         }
         return parentv;
     }
