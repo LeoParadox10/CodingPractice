@@ -10,13 +10,13 @@ public:
     }
     
     int pop() {
-        int n = q.size();
+        int n=q.size();
         for(int i=0;i<n-1;i++)
         {
             push(q.front());
             q.pop();
         }
-        int x = q.front();
+        int x=q.front();
         q.pop();
         return x;
     }
