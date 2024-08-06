@@ -6,9 +6,8 @@
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
-class Solution
-{
-    public:
+class Solution {
+public:
     bool hasCycle(ListNode *head) {
         ListNode *curr=head;
         ListNode *prev=head;
