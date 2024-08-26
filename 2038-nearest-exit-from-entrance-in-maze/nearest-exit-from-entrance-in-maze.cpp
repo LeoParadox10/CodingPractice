@@ -33,14 +33,12 @@ public:
             q.pop();
             for(int i=0;i<4;i++)
             {
-                int newx=x+dx[i];
-                int newy=y+dy[i];
-                if(isValid(maze, vis, newx, newy))
+                if(isValid(maze, vis, x+dx[i], y+dy[i]))
                 {
-                    if(reachEnd(maze, newx, newy))
+                    if(reachEnd(maze, x+dx[i], y+dy[i]))
                         return cnt;
-                    vis[newx][newy]=true;
-                    q.push({{newx, newy}, cnt+1});
+                    vis[x+dx[i]][y+dy[i]]=true;
+                    q.push({{x+dx[i], y+dy[i]}, cnt+1});
                 }
             }
         }
