@@ -7,29 +7,29 @@ public:
             g[edges[i][0]].push_back({edges[i][1], succProb[i]});
             g[edges[i][1]].push_back({edges[i][0], succProb[i]});
         }
-        vector<int> seen(n, 0);
+        vector<bool> vis(n, false);
         priority_queue<pair<double, int>> q;
         q.push({(double)1.0, start_node});
-        vector<double> mx(n, (double)0.0);
-        mx[start_node]=1.0;
+        vector<double> temp(n, (double)0.0);
+        temp[start_node]=1.0;
         while(!q.empty())
         {
             double prob=q.top().first;
             int node=q.top().second;
             q.pop();
-            if(!seen[node])
+            if(!vis[node])
             {
-                seen[node]++;
-                for(auto &to:g[node])
+                vis[node]=true;
+                for(auto neighbour:g[node])
                 {
-                    if(mx[to.first]<to.second*prob)
+                    if(temp[neighbour.first]<neighbour.second*prob)
                     {
-                        mx[to.first]=to.second*prob;
-                        q.push({mx[to.first], to.first});
+                        temp[neighbour.first]=neighbour.second*prob;
+                        q.push({temp[neighbour.first], neighbour.first});
                     }
                 }
             }
         }
-        return mx[end_node];
+        return temp[end_node];
     }
 };
