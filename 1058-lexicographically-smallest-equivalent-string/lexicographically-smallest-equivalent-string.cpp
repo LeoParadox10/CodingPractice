@@ -4,9 +4,6 @@ public:
     int find(int u)
     {
         return parent[u]==u?u:find(parent[u]);
-        if(parent[u]=u)
-            return u;
-        return parent[u]=find(parent[u]);
     }
     
     string smallestEquivalentString(string s1, string s2, string baseStr) {
